@@ -5,7 +5,7 @@ import numpy as np
 def loadDataSet():#determine whether a sentense is offensive
     postingList=[]
     classVec=[]
-    with open("c:\\Users\\o1030\\Desktop\\work\\machine learning\\text_for_positive.txt","r") as pos:
+    with open("text_for_positive.txt","r") as pos:
         for line in pos.readlines():
             line=line.strip('\n')
             postingList.append(line.split(' '))
@@ -13,7 +13,7 @@ def loadDataSet():#determine whether a sentense is offensive
     
     #print(postingList)
 
-    with open("c:\\Users\\o1030\\Desktop\\work\\machine learning\\text_for_negative.txt","r") as neg:
+    with open("text_for_negative.txt","r") as neg:
         for line in neg.readlines():
             line=line.strip('\n')
             postingList.append(line.split(' '))
