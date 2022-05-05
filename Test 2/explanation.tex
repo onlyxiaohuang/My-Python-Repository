@@ -38,8 +38,37 @@
             return group,labels
         \end{lstlisting}
 
+    \subsection{主函数处理}
+        接着是处理的主函数
+        \begin{lstlisting}[language={Python}]
+            def classify0(inX,dataSet,labels,k):
+            #shape[0] means the rows
+            dataSetSize = dataSet.shape[0]
+            #repeat the array
+            diffMat = np.tile(inX, (dataSetSize, 1)) - dataSet
+
+            #count the differences between two vectors
+            sqDiffMat = diffMat ** 2
+            sqDistances = sqDiffMat.sum(axis = 1)
+            distances = sqDistances ** 0.5
+            sortedDistIndices = distances.argsort()
+
+
+            #count the apperances of each label
+            classCount = {}
+            for i in range (k) :
+                voteIlabel = labels[sortedDistIndices[i]]
+                classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
+            
+            #itemgetter was used for sorting
+            #reverse means sorting from big to small ones
+            sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1),reverse = True)
+
+            return sortedClassCount[0][0]
+        \end{lstlisting}
     
 
-
+        \section{不足与改进}
+            因为训练集数量过少，现在我们得到的结果并不是很令人满意，我们可以通过提高数据的训练强度来达到我们的目的。
 
 \end{document}
